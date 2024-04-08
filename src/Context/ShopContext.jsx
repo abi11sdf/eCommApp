@@ -23,11 +23,10 @@ const ShopContextProvider = (props) => {
     
 
     useEffect(() => {
-        axios
-        .get(`${BaseUrl}allproducts`)
+        fetch(`${BaseUrl}allproducts`)
             .then((res) => res.json())
             .then((res) => {
-               
+               console.log(res)
             set_Allproduct(res)
         })
 

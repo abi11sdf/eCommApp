@@ -24,7 +24,7 @@ function Navbar() {
             <div className="nav-logo">
                 <img src={logo} alt="" />
 
-                <p>Jeff ecomm</p>
+                <p>ecomm</p>
             </div>
             <img className="nav-dropdown" onClick={dropdown_toggle} src={dropdownicon} alt="" />
             <ul className="nav-menu" ref={menuRef}>

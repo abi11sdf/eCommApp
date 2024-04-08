@@ -8,8 +8,11 @@ import { BaseUrl } from "../Constant/Constant";
 function Popular() {    
     const [PopularProducts, setPopularProducts] = useState([]);
     useEffect(() => {
-        axios.get (`${BaseUrl}popularinwomen`)
-            .then((res) => res.json())
+        fetch(`${BaseUrl}popularinwomen`)
+            .then((res) => {
+                console.log(res.json())
+                console.log(res)
+            })
             .then((res) => {
                
             setPopularProducts(res)
