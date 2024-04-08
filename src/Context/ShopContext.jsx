@@ -1,5 +1,7 @@
-import React, { createContext, useState} from "react";
-import all_product from "../Components/Assets/all_product";
+import axios from "axios";
+import React, { createContext, useEffect, useState} from "react";
+import { BaseUrl } from "../Components/Constant/Constant";
+// import all_product from "../Components/Assets/all_product";
 
 
 export const ShopContext = createContext(null)
@@ -8,7 +10,7 @@ export const ShopContext = createContext(null)
  const getDefaultCart = () => {
         let cart = {};
 
-        for (let index = 0; index < all_product.length+1; index++) {
+        for (let index = 0; index <300+1; index++) {
             cart[index] = 0;
             
         }
@@ -17,6 +19,36 @@ export const ShopContext = createContext(null)
 
 const ShopContextProvider = (props) => {
     const [cartItem, setCartItems] = useState(getDefaultCart())  
+    const [all_product, set_Allproduct] = useState([])
+    
+
+    useEffect(() => {
+        axios
+        .get(`${BaseUrl}allproducts`)
+            .then((res) => res.json())
+            .then((res) => {
+               
+            set_Allproduct(res)
+        })
+
+        if (localStorage.getItem('auth-token')) {
+            axios
+        .post(`${BaseUrl}getcart`, {
+               
+                headers: {
+                    Accept: "application/form-data",
+                    'auth-token': `${localStorage.getItem('auth-token')}`,
+                    'Content-Type':'application/json'
+                },
+                body:""
+             })
+            .then((res) => res.json())
+            .then((res) => {
+               
+            setCartItems(res)
+        })
+        }
+    },[])
     
   
 
@@ -24,12 +56,48 @@ const ShopContextProvider = (props) => {
         setCartItems((previous) => ({
             ...previous,[itemid]:previous[itemid]+1
         }))
+        if (localStorage.getItem('auth-token')) {
+           axios
+           .post(`${BaseUrl}addtocart`, {
+              
+            headers: {
+                Accept: 'application/json',
+                'auth-token':`${localStorage.getItem('auth-token')}`,
+                'Content-Type': 'application/json',
+            
+                },
+            body: JSON.stringify({"itemId":itemid})
+           })
+                .then((res) => res.json())
+               .then((res) => {
+                console.log(res)
+            })
+            
+        }
     }
 
      const removefromcart = (itemid) => {
         setCartItems((previous) => ({
             ...previous,[itemid]:previous[itemid]-1
         }))
+          if (localStorage.getItem('auth-token')) {
+           axios
+           .post(`${BaseUrl}removefromcart`, {
+              
+            headers: {
+                Accept: 'application/json',
+                'auth-token':`${localStorage.getItem('auth-token')}`,
+                'Content-Type': 'application/json',
+            
+                },
+            body: JSON.stringify({"itemId":itemid})
+           })
+                .then((res) => res.json())
+               .then((res) => {
+                console.log(res)
+            })
+            
+        }
     }
 
     function getTotalCartItems() {
