@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecom-try-deployment
+  labels:
+    app: ecom-try
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ecom-try
+  template:
+    metadata:
+      labels:
+        app: ecom-try
+    spec:
+      containers:
+        - name: ecom-try
+          image: 869823016797.dkr.ecr.us-east-1.amazonaws.com/ecom-try:latest
+          ports:
+            - containerPort: 3000
