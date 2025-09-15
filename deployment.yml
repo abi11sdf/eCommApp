@@ -19,4 +19,4 @@ spec:
           image: 869823016797.dkr.ecr.us-east-1.amazonaws.com/ecom-try:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 3000
+            - containerPort: 80
