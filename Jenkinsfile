@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/abi11sdf/eCommApp.git', branch: 'main'
+        git url: 'https://github.com/abi11sdf/eCommApp.git', branch: 'chan'
       }
     }
     
