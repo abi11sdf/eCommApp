@@ -5,10 +5,10 @@ metadata:
   labels:
     app: ecom-try
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: ecom-try
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000
+      targetPort: 80
