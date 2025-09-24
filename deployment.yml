@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ecom-try
-          image: 869823016797.dkr.ecr.us-east-1.amazonaws.com/ecom-try:latest
+          image: 236604669997.dkr.ecr.us-east-1.amazonaws.com/roman:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
